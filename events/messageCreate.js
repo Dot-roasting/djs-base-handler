@@ -33,9 +33,12 @@ client.on("messageCreate", async (message) => {
     if (!message.guild.me.permissionsIn(message.channel).has(command.botChannelPerms || [])) return message.channel.send({content: `I need **\`${command.votChannelPerms}\`** to use this command.`});
     //Bot permission check in Server
     if (!message.guild.me.permissions.has(command.botPerms || [])) return message.channel.send({content: `I need **\`${command.botPerms}\`** to use this command.`});
+    //Server owner only commands
+    if(command.serverOwner === true && message.author.id !== message.guild.ownerId) return message.channel.send({content: `This command is only accessible by the server owner.`});
     
     if (!command) return;
     await command.run(client, message, args).catch(async (error) => {
+    //Error handler
     console.log(error)
     });
     module.exports = command
