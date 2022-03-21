@@ -6,12 +6,12 @@ client.on("messageCreate", async (message) => {
         message.author.bot ||
         !message.guild ||
         !message.guild.me.permissions.has('SEND_MESSAGES') ||
-        !message.guild.me.permissionsIn(message.channel).has('SEND_MESSAGES') ||
+        !message.guild.me.permissionsIn(message.channel).has('SEND_MESSAGES')
     )
         return;
 
         if (!message.content.toLowerCase().startsWith(client.config.prefix)) return;
-        const args = message.content.slice(client.config.prefix.length.trim().split(/ +/);
+        const args = message.content.slice(client.config.prefix.length.trim().split(/ +/));
 
         const cmd = args.shift();
 
