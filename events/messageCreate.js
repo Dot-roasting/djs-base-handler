@@ -1,6 +1,7 @@
 const client = require("../index");
 
 client.on("messageCreate", async (message) => {
+    try {
     if (message.author.bot || !message.guild || !message.guild.me.permissions.has('SEND_MESSAGES') || !message.guild.me.permissionsIn(message.channel).has('SEND_MESSAGES')) return;
     
     // Mention Prefix
@@ -41,4 +42,7 @@ client.on("messageCreate", async (message) => {
     });
 
     module.exports = command
+    } catch (e) {
+    console.log(e)
+    }
 });
