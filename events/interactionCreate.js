@@ -32,7 +32,7 @@ client.on("interactionCreate", async (interaction) => {
              await interaction.deferReply({ephemeral: true})
              return interaction.followUp({content: `Only Bot Owner/ Developer can use this command`, ephemeral: true})
             }
-                if(cmd.serverOwner === true && interaction.member.id !== interaction.guild.ownerId)){
+                if(cmd.serverOwner === true && interaction.member.id !== interaction.guild.ownerId){
              await interaction.deferReply({ephemeral: true})
              return interaction.followUp({content: `Only server owner can use this command`, ephemeral: true})
             }
