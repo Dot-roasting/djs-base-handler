@@ -23,13 +23,11 @@ module.exports = async (client) => {
     });
 
     // Events
-    const eventFiles = await globPromise(`${process.cwd()}/events/*.js`);
+    const eventFiles = await globPromise(`${process.cwd()}/events/**/*.js`);
     eventFiles.map((value) => require(value));
 
     // Slash Commands
-    const slashCommands = await globPromise(
-        `${process.cwd()}/SlashCommands/*/*.js`
-    );
+    const slashCommands = await globPromise(`${process.cwd()}/slash/*/*.js`);
 
     const arrayOfSlashCommands = [];
     slashCommands.map((value) => {
@@ -53,5 +51,5 @@ module.exports = async (client) => {
     const { mongooseConnectionString } = require('../config.json')
     if (!mongooseConnectionString) return;
 
-    mongoose.connect(mongooseConnectionString).then(() => console.log('Connected to mongodb'));
+    mongoose.connect(mongooseConnectionString).then(() => console.log('Connected to the MongoDB Database!'));
 };
