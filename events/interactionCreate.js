@@ -26,7 +26,7 @@ client.on("interactionCreate", async (interaction) => {
             }
                 if(!interaction.guild.me.permissions.has(cmd.botPermissions || [])){
              await interaction.deferReply({ephemeral: true})
-             return interaction.followUp({content: `I need **\`${cmd.memberPermissions}\`** permission to use this command`, ephemeral: true})
+             return interaction.followUp({content: `I need **\`${cmd.botPermissions}\`** permission to use this command`, ephemeral: true})
             }
                 if(cmd.owner === true && interaction.member.id !== 'OWNER ID'){
              await interaction.deferReply({ephemeral: true})
