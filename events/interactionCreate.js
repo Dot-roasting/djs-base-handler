@@ -1,6 +1,7 @@
 const client = require("../index");
 
 client.on("interactionCreate", async (interaction) => {
+   try {
     // Slash Command Handling
     if (interaction.isCommand()) {
         const cmd = client.slashCommands.get(interaction.commandName);
@@ -53,4 +54,7 @@ client.on("interactionCreate", async (interaction) => {
         const command = client.slashCommands.get(interaction.commandName);
         if (command) command.run(client, interaction);
     }
+   } catch (e) {
+   console.log(e)
+   }
 });
