@@ -1,13 +1,7 @@
 const client = require("../index");
 
 client.on("messageCreate", async (message) => {
-    if (
-        message.author.bot ||
-        !message.guild ||
-        !message.guild.me.permissions.has('SEND_MESSAGES') ||
-        !message.guild.me.permissionsIn(message.channel).has('SEND_MESSAGES')
-    )
-        return;
+    if (message.author.bot || !message.guild || !message.guild.me.permissions.has('SEND_MESSAGES') || !message.guild.me.permissionsIn(message.channel).has('SEND_MESSAGES')) return;
     
     // Mention Prefix
     let pref2;
@@ -24,22 +18,27 @@ client.on("messageCreate", async (message) => {
 
     const command = client.commands.get(cmd.toLowerCase()) || client.commands.find(c => c.aliases?.includes(cmd.toLowerCase()));
     
-    // Commnad user permission check
+    // Command User Permissions Check
     if (!message.member.permissions.has(command.memberPermissions || [])) return message.channel.send({ content: `I need **\`${command.memberPermissions}\`** to use this command!` });
-    // Bot owner only commands
+    
+    // Bot Developer Permissions Commands
     if (command.owner === true && message.author.id !== 'OWNER ID') return message.channel.send('This command is for the bot owner only!'); //replace 'OWNER ID' with the bot owner's ID
-    // Bot permission check in message channel   
+    
+    // Bot Channel Permissions Check   
     if (!message.guild.me.permissionsIn(message.channel).has(command.botChannelPerms || [])) return message.channel.send({ content: `I need **\`${command.botChannelPerms}\`** to use this command.` });
-    // Bot permission check in Server
+    
+    // Bot Server Permissions Check
     if (!message.guild.me.permissions.has(command.botPerms || [])) return message.channel.send({ content: `I need **\`${command.botPerms}\`** to use this command.` });
-    // Server owner only commands
+    
+    // Server Owner Permissions Check
     if(command.serverOwner === true && message.author.id !== message.guild.ownerId) return message.channel.send({ content: `This command is only accessible by the server owner.` });
     
     if (!command) return;
-    await command.run(client, message, args).catch(async (error) => {
     
-    // Error handler
-    console.log(error)
+    await command.run(client, message, args).catch(async (error) => {
+      // Error handler
+      console.log(error);
     });
+
     module.exports = command
 });
