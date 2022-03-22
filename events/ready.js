@@ -1,5 +1,6 @@
 const client = require("../index");
 
-client.on("ready", () =>
-    console.log(`${client.user.tag} is up and ready to go!`)
-);
+client.on("ready", () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setActivity('STATUS HERW', { type: 'PLAYING' });
+});

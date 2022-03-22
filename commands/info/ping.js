@@ -3,11 +3,12 @@ const { Message, Client } = require("discord.js");
 module.exports = {
     name: "ping",
     aliases: ['p'],
-    memberPermissions: ['ADMINISTRATOR'], //Member Permission Check
-    botPerms: ['ADMINISTRATOR'], //Bot Permission check in server
-    botChannelPerms: ['EMBED_LINKS'], // Bot permission check in Channel
-    owner: true, //Owner Only check
-    serverOwner: true, //Server Owner check
+    memberPermissions: ['SEND_MESSAGES'], // Member Permission Check
+    botPerms: ['SEND_MESSAGES'], // Bot Permission check in server
+    botChannelPerms: ['SEND_MESSAGES'], // Bot permission check in Channel
+    owner: true, // Owner Only check
+    serverOwner: true, // Server Owner check
+
     /**
      *
      * @param {Client} client

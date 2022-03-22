@@ -9,7 +9,7 @@ const globPromise = promisify(glob);
  * @param {Client} client
  */
 module.exports = async (client) => {
-    // Commands
+    // Legacy Commands
     const commandFiles = await globPromise(`${process.cwd()}/commands/**/*.js`);
     commandFiles.map((value) => {
         const file = require(value);
@@ -40,17 +40,16 @@ module.exports = async (client) => {
         if (["MESSAGE", "USER"].includes(file.type)) delete file.description;
         arrayOfSlashCommands.push(file);
     });
+
     client.on("ready", async () => {
         // Register for a single guild
-        await client.guilds.cache
-            .get("replace this with your guild id")
-            .commands.set(arrayOfSlashCommands);
+        await client.guilds.cache.get("Your Guild ID").commands.set(arrayOfSlashCommands);
 
         // Register for all the guilds the bot is in
         // await client.application.commands.set(arrayOfSlashCommands);
     });
 
-    // mongoose
+    // Mongoose
     const { mongooseConnectionString } = require('../config.json')
     if (!mongooseConnectionString) return;
 
